@@ -19,4 +19,9 @@ class BloodOath
         @@all
     end
 
+   # * `BloodOath.first_oath` * returns the `Follower` instance for the follower that made the very first blood oath
+    #    def self.first_oath
+    #     BloodOath.all.min_by {|bloodoath| bloodoath.initiation_date}
+    #    end
+
 end

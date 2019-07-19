@@ -57,4 +57,36 @@ class Cult
         self.all.select {|cult| cult.founding_year == year}
     end
 
+    #* `Cult#average_age`* returns a `Float` that is the average age of this cult's followers
+    def followers
+        cult_bloodoaths = BloodOath.all.select {|bloodoath| bloodoath.cult == self}
+        cult_bloodoaths.map {|bloodoath| bloodoath.follower}
+    end
+
+    def average_age
+        follower_ages = followers.map {|follower| follower.age }
+        follower_ages.reduce {|total, age| total+age}.to_f / cult_population
+    end
+
+    #* `Cult#my_followers_mottos`* prints out all of the mottos for this cult's followers
+    def my_followers_mottos
+        followers.each { |follower| puts follower.life_motto }
+    end
+
+    #* `Cult.least_popular`* returns the `Cult` instance who has the least number of followers :(
+
+    def self.least_popular
+        self.all.min_by {|cult| cult.cult_population} 
+    end
+
+    #* `Cult.most_common_location`* returns a `String` that is the location with the most cults
+    def self.cult_locations
+        self.all.map {|cult| cult.location }.uniq
+    end
+        
+    def self.most_common_location
+        cult_locations.max_by {|location| find_by_location(location).length }
+    end
+
+
 end

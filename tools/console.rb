@@ -29,6 +29,10 @@ bloodoath4 = BloodOath.new("2010-04-09", instagram, valentino)
 
 bloodoath5 = BloodOath.new("2009-03-12", snapchat, valentino)
 
+bloodoath6 = BloodOath.new("2010-06-22", facebook, andrew)
+
+bloodoath7 = BloodOath.new("2009-05-14", snapchat, andrew)
+
 binding.pry
 
 puts "Mwahahaha!" # just in case pry is buggy and exits

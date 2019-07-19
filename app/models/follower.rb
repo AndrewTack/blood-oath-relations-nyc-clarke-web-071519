@@ -38,4 +38,17 @@ class Follower
     self.all.select {|follower| follower.age >= age}
   end
 
+  #* `Follower#my_cults_slogans`* prints out all of the slogans for this follower's cults
+  def my_cults_slogans
+    cults.each {|cult| puts cult.slogan }
+  end
+
+  #* `Follower.most_active`* returns the `Follower` instance who has joined the most cults
+  def self.most_active   
+    self.all.max_by {|follower| follower.cults.length} 
+  end
+
+  #* `Follower.top_ten`* returns an `Array` of followers; they are the ten most active followers
+
+
 end
