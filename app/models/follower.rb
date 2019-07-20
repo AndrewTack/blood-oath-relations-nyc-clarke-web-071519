@@ -27,8 +27,17 @@ class Follower
     end
 
     # Follower#join_cult takes in an argument of a `Cult` instance and adds this follower to the cult's list of followers
+    # BONUS
+    # Follower#join_cult takes in an argument of a `Cult` instance and adds this follower to the cult's list of followers
+    # NOW this is changed such that if you don't meet the minimum age requirement of the given `Cult` instance:
+    # - do not let them join the cult
+    # - print out a friendly message informing them that they are too young
     def join_cult(cult)
-        BloodOath.new(Date.today.to_s, cult, self)
+        if self.age >= cult.minimum_age
+          BloodOath.new(Date.today.to_s, cult, self)
+        else
+          puts "Sorry! The minimum age to join #{cult.name} is #{cult.minimum_age}. Please come back in #{cult.minimum_age - self.age} years!"
+        end
     end
 
     # Follower.of_a_certain_age takes a `Fixnum` argument that is an age and returns an `Array` of followers who are the given age or older
@@ -50,6 +59,13 @@ class Follower
   def self.top_ten
     followers_sorted_by_activity = self.all.sort_by {|follower| follower.cults.length}
     followers_sorted_by_activity.last(10)
+  end
+
+  # Follower#fellow_cult_members returns a unique `Array` of followers who are in the same cults as you
+  def fellow_cult_members
+    friends = cults.map {|cult| cult.followers}.flatten.uniq
+    friends.delete(self)
+    friends
   end
 
 end

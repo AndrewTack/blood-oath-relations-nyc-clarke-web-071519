@@ -32,6 +32,10 @@ bloodoath10 = BloodOath.new("2015-12-30", snapchat, hyo)
 bloodoath11 = BloodOath.new("2014-11-08", instagram, jason)
 bloodoath12 = BloodOath.new("1996-09-16", twitter, jason)
 
+facebook.minimum_age = 20
+twitter.minimum_age = 26
+instagram.minimum_age = 18
+snapchat.minimum_age = 12
 
 binding.pry
 

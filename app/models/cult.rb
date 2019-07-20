@@ -1,10 +1,14 @@
 class Cult
 
+    # Cult#minimum_age returns a `Fixnum` that is the minimum age required for followers joining this cult
+    attr_accessor :minimum_age
+    
     # Cult#name returns a `String` that is the cult's name
     # Cult#locationreturns a `String` that is the city where the cult is located
     # Cult#founding_year returns a `Fixnum` that is the year the cult was founded
     # Cult#slogan returns a `String` that is this cult's slogan
     attr_reader :name, :location, :founding_year, :slogan
+    
 
     @@all = []
 
@@ -23,8 +27,17 @@ class Cult
     end
 
     # Cult#recruit_follower takes in an argument of a `Follower` instance and adds them to this cult's list of followers
+    # BONUS
+    # Cult#recruit_follower takes in an argument of a `Follower` instance and adds them to this cult's list of followers
+    # NOW this is changed such that if the given `Follower` instance is not of age:
+    # - do not let them join the cult
+    # - print out a friendly message informing them that they are too young
     def recruit_follower(follower)
-        BloodOath.new(Date.today.to_s, self, follower)
+        if follower.age >= self.minimum_age
+            BloodOath.new(Date.today.to_s, self, follower)
+        else
+            puts "Sorry! The minimum age to join #{self.name} is #{self.minimum_age}. Please come back in #{self.minimum_age - follower.age} years!"
+        end
     end
 
     # Cult#cult_population returns a `Fixnum` that is the number of followers in this cult
@@ -85,5 +98,8 @@ class Cult
         cult_locations.max_by {|location| find_by_location(location).length }
     end
 
-
+    # Cult#recruit_follower takes in an argument of a `Follower` instance and adds them to this cult's list of followers
+    # NOW this is changed such that if the given `Follower` instance is not of age:
+    # - do not let them join the cult
+    # - print out a friendly message informing them that they are too young
 end
